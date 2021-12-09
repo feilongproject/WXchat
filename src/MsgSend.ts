@@ -1,19 +1,14 @@
-import {wxserver} from './var'
+import { wxserver } from './var'
+import { GetToken } from './GetToken'
 var CHAT: KVNamespace
 
+//文档：https://work.weixin.qq.com/api/doc/90000/90135/90236
 export async function MsgSend(msgInfo: string, type: string): Promise<Response> {
     console.log(`send msg:${msgInfo},type:${type}`)
 
-    const getTokenRes = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${wxserver.wecomCId}&corpsecret=${wxserver.wecomSecret}`).then(res => res.text())
 
 
-    const accessToken = JSON.parse(getTokenRes).access_token
-    console.log(`accessToken: ${getTokenRes}`)
-    if (!accessToken) {
-        throw new Error('获取 accessToken 失败')
-    }
-
-    const sendMsgRes = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${accessToken}`, {
+    const sendMsgRes = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${await GetToken()}`, {
         method: "post",
         body: JSON.stringify({
             msgtype: type,
@@ -29,7 +24,6 @@ export async function MsgSend(msgInfo: string, type: string): Promise<Response> 
     }).then(res => {
         return JSON.parse(res)
     })
-
 
 
     //var res=JSON.parse(`{"errcode":0,"errmsg":"ok","msgid":"fcLc6UhB2absSaoEDgOVFPKytt-HIDZeXtI_-55eQiuVLzkX6jsB0s_lvaCaVg30kvOFUhPd5r0FEnI-iXyeSw"}`)
