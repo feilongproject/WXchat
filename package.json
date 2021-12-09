@@ -1,0 +1,24 @@
+{
+    "name": "wxchat",
+    "version": "1.0.0",
+    "description": "通过web界面和微信用户聊天",
+    "main": "dist/worker.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "author": "feilongproject",
+    "license": "MIT OR Apache-2.0",
+    "devDependencies": {
+        "@cloudflare/workers-types": "^3.0.0",
+        "@types/service-worker-mock": "^2.0.1",
+        "service-worker-mock": "^2.0.5",
+        "ts-loader": "^9.2.2",
+        "typescript": "^4.3.2",
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.0"
+    },
+    "dependencies": {
+        "@types/crypto-js": "^4.0.2",
+        "crypto-js": "^4.1.1"
+    }
+}
