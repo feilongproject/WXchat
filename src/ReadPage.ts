@@ -1,11 +1,17 @@
-var CHAT:KVNamespace
+var CHAT: KVNamespace
 
-interface keyDef{
-    errcode:number,
-    MsgUserType:string,
-    Content:string
-    errmsg:string
+interface keyDef {
+    "errcode": number,
+    "MsgUserType": string,
+    "errmsg": string,
+    "invaliduser": string,
+    "invalidparty": string,
+    "invalidtag": string,
+    "msgid": string,
+    "response_code": string,
+    Content: string,
 }
+
 
 export async function readPage() {
 
@@ -16,7 +22,7 @@ export async function readPage() {
 
         var key = await CHAT.get(parseInt(list.keys[i].name).toString())
 
-        var keyId:keyDef = JSON.parse(key?key:"{}")
+        var keyId: keyDef = JSON.parse(key ? key : "{}")
 
         console.log(keyId)
         var date = new Date(parseInt(list.keys[i].name) * 1000 + 8 * 3600 * 1000)
@@ -37,7 +43,7 @@ export async function readPage() {
     console.log(page)
     return new Response(page, {
         headers: { "Content-Type": "text/html;charset=utf-8" },
-    }) 
+    })
 
 }
 
