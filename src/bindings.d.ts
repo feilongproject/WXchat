@@ -2,10 +2,10 @@ export { }
 
 declare global {
   const CHAT: KVNamespace;
-  
+
   interface receInfoDef {
+    MsgType?: string;
     CreateTime?: number;
-    //CreateTime: number,
     ToUserName?: string,
     Encrypt?: string,
     AgentID?: string,
@@ -18,7 +18,11 @@ declare global {
     MsgUserType?:string
     errcode?:number,
     Content?:string,
-    errmsg?:string
+    errmsg?:string,
+
+    PicUrl?: string,
+    MsgId?: string,
+    MediaId?: string,
 
   }
 }

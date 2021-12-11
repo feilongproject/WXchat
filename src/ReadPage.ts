@@ -17,12 +17,26 @@ export async function readPage() {
         var dateStrT = (date.getHours() > 9 ? date.getHours() : ("0" + date.getHours())) + ":" + (date.getMinutes() > 9 ? date.getMinutes() : ("0" + date.getMinutes())) + ':' + (date.getSeconds() > 9 ? date.getSeconds() : ("0" + date.getSeconds()))
         //console.log(dateStrD + " " + dateStrT)
 
-        page += `
-          <div class="msg-${keyId.MsgUserType}">
-            <span>Time:${dateStrD + " " + dateStrT}<hr>
-            Content:<br>
-            ${keyId.Content}</span>
-          </div>`
+        switch (keyId.MsgType) {
+            case "text":
+                page += `
+                    <div class="msg-${keyId.MsgUserType}">
+                        <span>Time:${dateStrD + " " + dateStrT}<hr>
+                        Content:<br>
+                        ${keyId.Content}</span>
+                    </div>`
+
+                break;
+            case "image":
+                page += `
+                    <div class="msg-${keyId.MsgUserType}">
+                    <span>Time:${dateStrD + " " + dateStrT}<hr>
+                    Content:<br>
+                    <img src="${keyId.PicUrl}" /></span>
+                    </div>`
+            default:
+                break;
+        }
     }
 
 

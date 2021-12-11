@@ -17,15 +17,39 @@ export async function AES_decode(MsgInfo: receInfoDef): Promise<receInfoDef> {
         return res.xml
     }).then(res => {
         //console.log(`${JSON.stringify(res)}`)
-        return {
-            ToUserName: res.ToUserName[0],
-            FromUserName: res.FromUserName[0],
-            CreateTime: res.CreateTime[0],
-            MsgType: res.MsgType[0],
-            Content: res.Content[0],
-            MsgId: res.MsgId[0],
-            AgentID: res.AgentID[0]
+        console.log(`vml to json: ${JSON.stringify(res)}`)
+        var MsgType = res.MsgType[0]
+        switch (MsgType) {
+            case "text":
+                return {
+                    ToUserName: res.ToUserName[0],
+                    FromUserName: res.FromUserName[0],
+                    CreateTime: res.CreateTime[0],
+                    MsgType: MsgType,
+                    Content: res.Content[0],
+                    MsgId: res.MsgId[0],
+                    AgentID: res.AgentID[0],
+                }
+            case "image":
+                return {
+                    ToUserName: res.ToUserName[0],
+                    FromUserName: res.FromUserName[0],
+                    CreateTime: res.CreateTime[0],
+                    MsgType: res.MsgType[0],
+                    PicUrl: res.PicUrl[0],
+                    MsgId: res.MsgId[0],
+                    MediaId: res.MediaId[0],
+                    AgentID: res.AgentID[0],
+                }
+            default:
+                return {}
+
         }
+
+
+
+
+
     })
 
 }
