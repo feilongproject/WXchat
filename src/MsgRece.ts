@@ -1,54 +1,38 @@
-import CryptoJS from 'crypto-js'
+
 import xml2js from 'xml2js'
-import { wxserver } from './var'
+import { AES_decode } from './AES'
 
-var CHAT: KVNamespace
-
-interface receInfoDef {
-    MsgUserType: string,
-    CreateTime: number,
-
-}
-
-/*
-请求方式：POST
-请求地址 ：http://api.3dept.com/?msg_signature=ASDFQWEXZCVAQFASDFASDFSS&timestamp=13500001234&nonce=123412323
-
-接收数据格式 ：
-<xml> 
-   <ToUserName><![CDATA[toUser]]></ToUserName>  企业微信的CorpID，当为第三方套件回调事件时，CorpID的内容为suiteid
-   <AgentID><![CDATA[toAgentID]]></AgentID>     接收的应用id，可在应用的设置页面获取
-   <Encrypt><![CDATA[msg_encrypt]]></Encrypt>   消息结构体加密后的字符串
-</xml>
-*/
 export async function MsgRece(receBody: string, url: URL) {
-    
-    CryptoJS
 
-    console.log(`MsgRece Body: ${receBody}`)
+    console.log(`MsgRece Body xml: ${receBody}`)
 
-    var receInfo: receInfoDef =await xml2js.parseStringPromise(receBody).then((res) => {
-        return res
+    const receInfo: receInfoDef = await xml2js.parseStringPromise(receBody).then((res) => {
+        return res.xml
+    }).then(res => {
+        return {
+            ToUserName: res.ToUserName[0],
+            Encrypt: res.Encrypt[0],
+            AgentID: res.AgentID[0],
+            msg_signature: url.searchParams.get("msg_signature"),
+            nonce: url.searchParams.get("nonce"),
+            timestamp: url.searchParams.get("timestamp"),
+        }
     })
 
 
+    console.log(`Msgrece Body json: ${JSON.stringify(receInfo)}`)
 
-    /*
-        var receInfo = await fetch(`${wxserver.decodeurl}${url.search}`, {
-            method: "post",
-            body: receBody
-        }).then(res => {
-            return res.text()
-        }).then(res => {
-            return JSON.parse(res)
-        })
-    */
-    receInfo.MsgUserType = "another"
+    var decodeData = await AES_decode(receInfo)
+    decodeData.MsgUserType = "another"
 
-    console.log(`receInfo:${receInfo}`)
-    await CHAT.put(receInfo.CreateTime.toString(), JSON.stringify(receInfo))
+    console.log(`AES_encode: ${JSON.stringify(decodeData)}`)
 
-    return new Response(JSON.stringify(receInfo), {
+    if (!decodeData.CreateTime) decodeData.CreateTime = Date.now()
+
+    await CHAT.put(decodeData.CreateTime.toString(), JSON.stringify(decodeData))
+
+
+    return new Response(JSON.stringify(decodeData), {
         headers: { "Content-Type": "text/html;charset=utf-8" },
     })
 

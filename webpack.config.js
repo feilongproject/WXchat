@@ -10,6 +10,9 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    fallback: {
+      crypto: require.resolve("browser-crypto")
+    },
   },
   module: {
     rules: [

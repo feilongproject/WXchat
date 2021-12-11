@@ -1,4 +1,4 @@
-import { wxserver } from './var'
+import { WX } from './var'
 import { GetToken } from './GetToken'
 var CHAT: KVNamespace
 
@@ -12,8 +12,8 @@ export async function MsgSend(msgInfo: string, type: string): Promise<Response> 
         method: "post",
         body: JSON.stringify({
             msgtype: type,
-            agentid: wxserver.wecomAgentId,
-            touser: wxserver.wecomTouid,
+            agentid: WX.wecomAgentId,
+            touser: WX.wecomTouid,
             text: {
                 content: msgInfo,
             },

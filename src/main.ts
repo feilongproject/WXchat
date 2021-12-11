@@ -4,12 +4,13 @@ import { readPage } from './ReadPage'
 
 
 async function Main(request: Request): Promise<Response> {
-    console.log(request)
+
+    //console.log(request)
     const url = new URL(request.url)
     console.log(url)
 
     const { pathname } = url
-    console.log(`pathname: ${pathname} ; href: ${url.href}`)
+    console.log(`pathname: ${pathname}; href: ${url.href}`)
 
     var returnMsg
     if (pathname.startsWith("/send")) {
@@ -22,6 +23,7 @@ async function Main(request: Request): Promise<Response> {
         return await MsgSend(msgInfo, type)
 
     } else if (pathname.startsWith("/rece")) {
+        console.log("msg receing")
         return await MsgRece(await request.text(), url)
 
     } else if (pathname.startsWith("/read") || pathname == "/") {
@@ -37,6 +39,7 @@ async function Main(request: Request): Promise<Response> {
 
 
 addEventListener("fetch", (event) => {
+    console.log(`\n\n\nlog start,d=${Date.now()}`)
     event.respondWith(
         Main(event.request).catch(
             (err) => new Response(err.stack, { status: 500 })

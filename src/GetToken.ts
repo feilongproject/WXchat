@@ -1,4 +1,4 @@
-import { wxserver } from './var'
+import { WX } from './var'
 var CHAT: KVNamespace
 
 interface Token {
@@ -22,7 +22,7 @@ export async function GetToken(): Promise<string> {
         return HistoryToken.access_token
     }
 
-    const NewToken: Token = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${wxserver.wecomCId}&corpsecret=${wxserver.wecomSecret}`).then(res => {
+    const NewToken: Token = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${WX.wecomCId}&corpsecret=${WX.wecomSecret}`).then(res => {
         return res.json()
     })
 
