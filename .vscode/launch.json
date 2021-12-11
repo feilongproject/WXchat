@@ -1,0 +1,10 @@
+{
+    "configurations": [
+    {
+        "command": "wrangler publish && exit",
+        "name": "wrangler publish",
+        "request": "launch",
+        "type": "node-terminal"
+    }
+    ]
+}
