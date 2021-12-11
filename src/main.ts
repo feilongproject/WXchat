@@ -1,6 +1,6 @@
 import { MsgRece } from './MsgRece'
 import { MsgSend } from './MsgSend'
-import { readPage } from './ReadPage'
+import { ReadPage } from './ReadPage'
 
 
 async function Main(request: Request): Promise<Response> {
@@ -27,7 +27,7 @@ async function Main(request: Request): Promise<Response> {
         return await MsgRece(await request.text(), url)
 
     } else if (pathname.startsWith("/read") || pathname == "/") {
-        return await readPage()
+        return await ReadPage()
 
     } else {
         return new Response(`<h1>404 not found page</h1>`, {

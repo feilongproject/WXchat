@@ -1,5 +1,8 @@
+import { readPage } from './var'
 
-export async function readPage() {
+
+export async function ReadPage() {
+    var page = readPage
     //console.log(CHAT)
     var list = await CHAT.list()
     console.log(list.keys)
@@ -47,27 +50,3 @@ export async function readPage() {
 
 }
 
-var page = `
-<html>
-  <head>
-    <link rel="icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/feilongproject/bili-downloader/favicon.ico">
-    <style type="text/css">
-        .msg-myself{
-            background-color: #0af;
-            margin: 5px 5px 5px 30%;
-        }
-        .msg-another{
-            background-color: #0af;
-            margin: 5px 30% 5px 5px;
-        }
-        .msg-undefined{
-            background-color: #f0f;
-            margin: 5px 30% 5px 5px;
-        }
-        hr{
-            margin: 0px 0px 0px 0px;
-        }
-
-    </style>
-  </head>
-  <body>`
