@@ -6,8 +6,10 @@ export async function ReadPage() {
     //console.log(CHAT)
     var list = await CHAT.list()
     console.log(list.keys)
-
-    for (var i = list.keys.length - 1; i >= 0; i--) {
+    if (list.keys.length == 0) {
+        page += `<h1>No Msg</h1>`
+    }
+    else for (var i = list.keys.length - 1; i >= 0; i--) {
 
         var key = await CHAT.get(parseInt(list.keys[i].name).toString())
 
