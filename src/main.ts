@@ -17,9 +17,12 @@ async function Main(request: Request): Promise<Response> {
         var msgInfo = url.searchParams.get("msg")
         var type = url.searchParams.get("type")
         if (!type) type = "text"
-        if (!msgInfo) return new Response("error: msg empty", {
-            headers: { "Content-Type": "text/html;charset=utf-8" },
-        })
+        if (!msgInfo) {
+            console.log(url.searchParams.toString())
+            return new Response("error: msg empty", {
+                headers: { "Content-Type": "text/html;charset=utf-8" },
+            })
+        }
         return await MsgSend(msgInfo, type)
 
     } else if (pathname.startsWith("/rece")) {
