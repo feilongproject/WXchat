@@ -1,5 +1,5 @@
 import { WX } from './var'
-var CHAT: KVNamespace
+
 
 interface Token {
     "errcode": number,
