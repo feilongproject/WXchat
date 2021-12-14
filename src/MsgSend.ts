@@ -3,7 +3,7 @@ import { GetToken } from './GetToken'
 
 //文档：https://work.weixin.qq.com/api/doc/90000/90135/90236
 export async function MsgSend(msgInfo: string, type: string): Promise<Response> {
-    console.log(`send msg:${msgInfo},type:${type}`)
+    console.log(`\nsend msg:${msgInfo}\ntype:${type}`)
 
 
 
@@ -23,16 +23,15 @@ export async function MsgSend(msgInfo: string, type: string): Promise<Response> 
     }).then(res => {
         return JSON.parse(res)
     })
+
+
     //var sendMsgRes: any = { "errcode": 0, "errmsg": "ok", "msgid": "123", "Content": "123456", "MsgUserType": "myself" }
-
-
     //var res=JSON.parse(`{"errcode":0,"errmsg":"ok","msgid":"fcLc6UhB2absSaoEDgOVFPKytt-HIDZeXtI_-55eQiuVLzkX6jsB0s_lvaCaVg30kvOFUhPd5r0FEnI-iXyeSw"}`)
 
     sendMsgRes.Content = msgInfo
     sendMsgRes.MsgUserType = "myself"
     sendMsgRes.MsgType = "text"
 
-    console.log(`returnMsg: ${JSON.stringify(sendMsgRes)}`)
 
     const d = new Date()
     const time = Math.trunc(d.getTime() / 1000)

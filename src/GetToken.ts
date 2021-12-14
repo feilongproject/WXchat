@@ -19,11 +19,14 @@ export async function GetToken(): Promise<string> {
     var d = new Date()
 
     if (d.getTime() < HistoryToken.expires_in + HistoryToken.add_in) {
+        console.log(`Old Token: ${JSON.stringify(HistoryToken)}`)
         return HistoryToken.access_token
     }
 
     const NewToken: Token = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${WX.wecomCId}&corpsecret=${WX.wecomSecret}`).then(res => {
-        return res.json()
+        const r: any = res.json()
+        console.log(`New Token: ${JSON.stringify(r)}`)
+        return r
     })
 
 
