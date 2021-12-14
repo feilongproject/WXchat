@@ -39,6 +39,13 @@ export async function ReadPage() {
                     Content:<br>
                     <img src="${keyId.PicUrl}" style="width: 20%;"/></span>
                     </div>`
+            case "voice":
+                page += `
+                    <div class="msg-${keyId.MsgUserType}">
+                    <span>Time:${dateStrD + " " + dateStrT}<hr>
+                    Content:<br>
+                    voice id: ${keyId.MediaId}</span>
+                    </div>`
             default:
                 break;
         }

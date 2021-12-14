@@ -41,6 +41,17 @@ export async function AES_decode(MsgInfo: receInfoDef): Promise<receInfoDef> {
                     MediaId: res.MediaId[0],
                     AgentID: res.AgentID[0],
                 }
+            case "voice":
+                return {
+                    ToUserName: res.ToUserName[0],
+                    FromUserName: res.FromUserName[0],
+                    CreateTime: res.CreateTime[0],
+                    MsgType: res.MsgType[0],
+                    MediaId: res.MediaId[0],
+                    Format: res.Format[0],
+                    MsgId: res.MsgId[0],
+                    AgentID: res.AgentID[0],
+                }
             default:
                 return {}
 
