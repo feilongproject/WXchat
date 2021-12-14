@@ -37,7 +37,7 @@ export async function ReadPage() {
                     <div class="msg-${keyId.MsgUserType}">
                     <span>Time:${dateStrD + " " + dateStrT}<hr>
                     Content:<br>
-                    <img src="${keyId.PicUrl}" /></span>
+                    <img src="${keyId.PicUrl}" style="width: 20%;"/></span>
                     </div>`
             default:
                 break;
@@ -45,7 +45,7 @@ export async function ReadPage() {
     }
 
 
-    console.log(page)
+    //console.log(page)
     return new Response(page, {
         headers: { "Content-Type": "text/html;charset=utf-8" },
     })
