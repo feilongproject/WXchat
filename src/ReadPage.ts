@@ -2,7 +2,9 @@ import { readPage } from './var'
 
 
 export async function ReadPage() {
-    var page = readPage
+    var page = ""
+    var pages = readPage
+
     //console.log(CHAT)
     var list = await CHAT.list()
     console.log(list.keys)
@@ -46,13 +48,26 @@ export async function ReadPage() {
                     <div class="msg-${keyId.MsgUserType}">
                         <span>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
-                            <a href="/conver?type=voice&id=${keyId.MediaId}">voice</a>
+                                <button onclick="PlayAmr('${keyId.MediaId}')">阅读语音</button>
+                                <div id="player-amr">
+                                <p>
+                                    <button id="amr-play" disabled>播放</button>
+                                    <button id="amr-stop" disabled>停止</button>
+                                    <input id="amr-progress" type="range" min="0" max="1" step="any" value="0" disabled>
+                                    <label for="amr-progress">
+                                        <span id="amr-cur">0'</span>
+                                        <span>/</span>
+                                        <span id="amr-duration">0'</span>
+                                    </label>
+                                </p>
+                            </div>
                             <details style="background-color: rgba(255, 255, 255, 0.5);">
                                 <summary>voice id</summary>
                                 ${keyId.MediaId}
                             </details>
                         </span>
-                    </div>`
+                    </div>
+                    `
             default:
                 break;
         }
@@ -60,6 +75,9 @@ export async function ReadPage() {
 
 
     //console.log(page)
+
+    page = pages.replaceAll("<!-- MSG BODY -->", page)
+
     return new Response(page, {
         headers: { "Content-Type": "text/html;charset=utf-8" },
     })
