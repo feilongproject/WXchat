@@ -26,25 +26,32 @@ export async function ReadPage() {
             case "text":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                        <span>Time:${dateStrD + " " + dateStrT}<hr>
-                        Content:<br>
-                        ${keyId.Content}</span>
+                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                            Content:<br>
+                            ${keyId.Content}
+                        </span>
                     </div>`
 
                 break;
             case "image":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                    <span>Time:${dateStrD + " " + dateStrT}<hr>
-                    Content:<br>
-                    <img src="${keyId.PicUrl}" style="width: 20%;"/></span>
+                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                            Content:<br>
+                            <img src="${keyId.PicUrl}" style="width: 20%;"/>
+                        </span>
                     </div>`
             case "voice":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                    <span>Time:${dateStrD + " " + dateStrT}<hr>
-                    Content:<br>
-                    voice id: ${keyId.MediaId}</span>
+                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                            Content:<br>
+                            <a href="/conver?type=voice&id=${keyId.MediaId}">voice</a>
+                            <details style="background-color: rgba(255, 255, 255, 0.5);">
+                                <summary>voice id</summary>
+                                ${keyId.MediaId}
+                            </details>
+                        </span>
                     </div>`
             default:
                 break;

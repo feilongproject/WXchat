@@ -1,7 +1,7 @@
 import { MsgRece } from './MsgRece'
 import { MsgSend } from './MsgSend'
 import { ReadPage } from './ReadPage'
-
+import { ConverVoice } from './ConverVoice'
 
 async function Main(request: Request): Promise<Response> {
 
@@ -31,6 +31,23 @@ async function Main(request: Request): Promise<Response> {
 
     } else if (pathname.startsWith("/read") || pathname == "/") {
         return await ReadPage()
+
+    } else if (pathname.startsWith("/conver")) {
+        const type = url.searchParams.get("type")
+        const id = url.searchParams.get("id")
+
+        console.log(`\nConver page\ntype: ${type}\nid: ${id}`)
+        if (type && id) {
+            if (type == "voice") {
+                return ConverVoice(id)
+            } else return new Response(`<h1>error: type unknown</h1>`, {
+                headers: { "Content-Type": "text/html;charset=utf-8" },
+            })
+        } else {
+            return new Response(`<h1>error: id or type empty</h1>`, {
+                headers: { "Content-Type": "text/html;charset=utf-8" },
+            })
+        }
 
     } else {
         return new Response(`<h1>404 not found page</h1>`, {
