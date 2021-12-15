@@ -33,7 +33,7 @@ export async function GetToken(): Promise<string> {
     NewToken.add_in = d.getTime()
     CHAT.put("Token", JSON.stringify(NewToken))
 
-    console.log(`accessToken: ${NewToken}`)
+    console.log(`accessToken: ${JSON.stringify(NewToken)}`)
 
     return NewToken.access_token
 }
