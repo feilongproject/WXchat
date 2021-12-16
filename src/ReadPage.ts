@@ -48,19 +48,7 @@ export async function ReadPage() {
                     <div class="msg-${keyId.MsgUserType}">
                         <span>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
-                                <button onclick="PlayAmr('${keyId.MediaId}')">阅读语音</button>
-                                <div id="player-amr">
-                                <p>
-                                    <button id="amr-play" disabled>播放</button>
-                                    <button id="amr-stop" disabled>停止</button>
-                                    <input id="amr-progress" type="range" min="0" max="1" step="any" value="0" disabled>
-                                    <label for="amr-progress">
-                                        <span id="amr-cur">0'</span>
-                                        <span>/</span>
-                                        <span id="amr-duration">0'</span>
-                                    </label>
-                                </p>
-                            </div>
+                            <button onclick="PlayAmr('${keyId.MediaId}')">阅读语音</button>
                             <details style="background-color: rgba(255, 255, 255, 0.5);">
                                 <summary>voice id</summary>
                                 ${keyId.MediaId}
