@@ -14,17 +14,33 @@ export var readPage = `
         <link rel="icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/feilongproject/bili-downloader/favicon.ico">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/BenzLeung/benz-amr-recorder/BenzAMRRecorder.min.js"></script>
         <style type="text/css">
-            .msg-myself{
+            body{
+                margin-right: 10%;
+                margin-left: 10%;
+                display: flex;
+                flex-direction: column;
                 background-color: #0af;
-                margin: 5px 5px 5px 30%;
+            }
+            body div{
+                margin: 10px 10px 10px 10px;
+            }
+            .msg-myself{
+                align-self: flex-end;
             }
             .msg-another{
-                background-color: #0af;
-                margin: 5px 30% 5px 5px;
+                align-self: flex-start;
+            }
+            .msg-another,
+            .msg-myself{
+                background-color: #0cf;
+                box-shadow: 1px 1px 50px rgb(0 0 0 / 30%);
+                border-radius: 5px;
+                width: 70%;
+                margin-bottom: 10px;
             }
             .msg-undefined{
                 background-color: #f0f;
-                margin: 5px 30% 5px 5px;
+                align-self: flex-end;
             }
             hr{
                 margin: 0px 0px 0px 0px;

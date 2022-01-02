@@ -28,32 +28,32 @@ export async function ReadPage() {
             case "text":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                        <div>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
                             ${keyId.Content}
-                        </span>
+                        </div>
                     </div>`
 
                 break;
             case "image":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                        <div>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
                             <img src="${keyId.PicUrl}" style="width: 20%;"/>
-                        </span>
+                        </div>
                     </div>`
             case "voice":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
-                        <span>Time: ${dateStrD + " " + dateStrT}<hr>
+                        <div>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
                             <button onclick="PlayAmr('${keyId.MediaId}')">阅读语音</button>
                             <details style="background-color: rgba(255, 255, 255, 0.5);">
                                 <summary>voice id</summary>
                                 ${keyId.MediaId}
                             </details>
-                        </span>
+                        </div>
                     </div>
                     `
             default:
