@@ -30,6 +30,7 @@ export var readPage = `
             .msg-another{
                 align-self: flex-start;
             }
+            .msg-send,
             .msg-another,
             .msg-myself{
                 background-color: #0cf;
@@ -45,11 +46,30 @@ export var readPage = `
             hr{
                 margin: 0px 0px 0px 0px;
             }
-
+            .msg-send-form{
+                display: flex;
+                justify-content: space-evenly;
+            }
+            .msg-send-text,
+            .msg-send-button{
+                background-color: #fff;
+                margin-top: 10px;
+                border-radius: 5px;
+                border: 5px solid #0000;
+            }
+            .msg-send-text{
+                flex-grow: 0.8;
+            }
         </style>
     </head>
     <body>
-    <!-- MSG BODY -->
+        <div class="msg-send">
+            <form action="/send" method="get" class="msg-send-form">
+                <input class="msg-send-text" type="text" id="msg" required="" placeholder="等待发送" name="msg">
+                <input class="msg-send-button" type="submit" value="发送">
+            </form>
+        </div>
+        <!-- MSG BODY -->
 
         <div id="player-amr">
         <p>
