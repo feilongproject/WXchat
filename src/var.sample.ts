@@ -9,9 +9,11 @@ export const WX = {
 }
 
 export var readPage = `
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" type="image/x-icon" href="//cdn.jsdelivr.net/gh/feilongproject/bili-downloader/favicon.ico">
+        <title>hello world</title>
+        <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/feilongproject/bili-downloader/favicon.ico">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/BenzLeung/benz-amr-recorder/BenzAMRRecorder.min.js"></script>
         <style type="text/css">
             body{
@@ -45,6 +47,9 @@ export var readPage = `
             }
             hr{
                 margin: 0px 0px 0px 0px;
+            }
+            .msg-send{
+                align-self: center;
             }
             .msg-send-form{
                 display: flex;
