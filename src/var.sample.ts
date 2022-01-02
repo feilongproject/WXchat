@@ -54,11 +54,12 @@ export var readPage = `
             .msg-send-form{
                 display: flex;
                 justify-content: space-evenly;
+                margin-top: 10px;
+                margin-bottom: 10px;
             }
             .msg-send-text,
             .msg-send-button{
                 background-color: #fff;
-                margin-top: 10px;
                 border-radius: 5px;
                 border: 5px solid #0000;
             }
