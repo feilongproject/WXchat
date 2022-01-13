@@ -43,6 +43,7 @@ export async function ReadPage() {
                             <img src="${keyId.PicUrl}" style="width: 20%;"/>
                         </div>
                     </div>`
+                break;
             case "voice":
                 page += `
                     <div class="msg-${keyId.MsgUserType}">
@@ -56,6 +57,7 @@ export async function ReadPage() {
                         </div>
                     </div>
                     `
+                break;
             default:
                 break;
         }
