@@ -3,26 +3,34 @@ export { }
 declare global {
   const CHAT: KVNamespace;
 
+
+  interface receInfo {
+    ToUserName: string,
+    AgentID: number,
+    Encrypt: string,
+  }
+
   interface receInfoDef {
-    MsgType?: string;
-    CreateTime?: number;
-    ToUserName?: string,
-    Encrypt?: string,
-    AgentID?: string,
-    msg_signature?: string | null,
-    timestamp?: string | null,
-    nonce?: string | null,
-    AesKey?: string,
-    EncodingAESKey?: string
-    FromUserName?: string
-    MsgUserType?:string
-    errcode?:number,
-    Content?:string,
-    errmsg?:string,
+    ToUserName: string,
+    FromUserName: string
+    CreateTime: number;
+    MsgType: string;
+    MsgId: number,
+    AgentID: number,
+
+    Content?: string,
 
     PicUrl?: string,
-    MsgId?: string,
     MediaId?: string,
 
+    //MediaId?: string;
+    Format?: string;
+
+    Event?: string;
+    EventKey?: string;
+
+
+    MsgUserType?: string
   }
+
 }

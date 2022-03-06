@@ -1,33 +1,31 @@
-import { MsgRece } from './MsgRece'
+import { WxCom } from 'wecom-msg-manage'
 import { MsgSend } from './MsgSend'
 import { ReadPage } from './ReadPage'
 import { ConverVoice } from './ConverVoice'
+import { WX } from './var'
+import { MsgRece } from './MsgRece'
 
 async function Main(request: Request): Promise<Response> {
 
-    //console.log(request)
     const url = new URL(request.url)
     console.log(url)
 
     const { pathname } = url
-    console.log(`pathname: ${pathname}; href: ${url.href}`)
+    console.log(`pathname: ${pathname}\nhref: ${url.href}`)
 
-    var returnMsg
+
+    const wxcom = new WxCom(WX.AgentId, WX.Secret, WX.CId, WX.token, WX.EncodingAESKey)
+
     if (pathname.startsWith("/send")) {
         var msgInfo = url.searchParams.get("msg")
         var type = url.searchParams.get("type")
         if (!type) type = "text"
-        if (!msgInfo) {
-            console.log(url.searchParams.toString())
-            return new Response("error: msg empty", {
-                headers: { "Content-Type": "text/html;charset=utf-8" },
-            })
-        }
+        if (!msgInfo) throw new Error("msg empty");
+
         return await MsgSend(msgInfo, type)
 
     } else if (pathname.startsWith("/rece")) {
-        console.log("msg receing")
-        return await MsgRece(await request.text(), url)
+        return await MsgRece(wxcom, request,)
 
     } else if (pathname.startsWith("/read") || pathname == "/") {
         return await ReadPage()

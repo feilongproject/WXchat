@@ -1,41 +1,48 @@
+import { WxCom } from 'wecom-msg-manage'
 
-import xml2js from 'xml2js'
-import { AES_decode } from './AES'
+export async function MsgRece(wxcom: WxCom, request: Request,): Promise<Response> {
 
-export async function MsgRece(receBody: string, url: URL) {
+    console.log("msg receing");
+    const url = new URL(request.url);
 
-    console.log(`MsgRece Body xml: ${receBody}`)
+    const msg_signature = url.searchParams.get("msg_signature");
+    const nonce = url.searchParams.get("nonce");
+    const timestamp = url.searchParams.get("timestamp");
 
-    const receInfo: receInfoDef = await xml2js.parseStringPromise(receBody).then((res) => {
-        return res.xml
-    }).then(res => {
-        return {
-            ToUserName: res.ToUserName[0],
-            Encrypt: res.Encrypt[0],
-            AgentID: res.AgentID[0],
-            msg_signature: url.searchParams.get("msg_signature"),
-            nonce: url.searchParams.get("nonce"),
-            timestamp: url.searchParams.get("timestamp"),
+
+    if (msg_signature && nonce && timestamp) {
+
+        switch (request.method) {
+            case "POST":
+                const decodeData = await wxcom.MsgDecode(
+                    await request.text(),
+                    msg_signature,
+                    parseInt(timestamp),
+                    parseInt(nonce)
+                );
+
+                const saveData: any = decodeData
+                saveData.MsgUserType = "server"
+                console.log(`AES_encode: ${JSON.stringify(saveData)}`)
+
+
+                await CHAT.put(decodeData.CreateTime.toString(), JSON.stringify(saveData))
+
+
+                return new Response(JSON.stringify(saveData), {
+                    headers: { "Content-Type": "text/html;charset=utf-8" },
+                })
+
+
+            case "GET":
+                const echostr = url.searchParams.get("echostr");
+                if (echostr) {
+                    return new Response((await wxcom.MsgTest(echostr)).msg);
+                } else throw new Error("not found echostr");
+            default:
+                throw new Error("unknown method");
         }
-    })
 
-
-    console.log(`Msgrece Body json: ${JSON.stringify(receInfo)}`)
-
-    var decodeData = await AES_decode(receInfo)
-    decodeData.MsgUserType = "another"
-
-    console.log(`AES_encode: ${JSON.stringify(decodeData)}`)
-
-    if (!decodeData.CreateTime) decodeData.CreateTime = Date.now()
-
-    await CHAT.put(decodeData.CreateTime.toString(), JSON.stringify(decodeData))
-
-
-    return new Response(JSON.stringify(decodeData), {
-        headers: { "Content-Type": "text/html;charset=utf-8" },
-    })
-
+    } else throw new Error("msg_signature/nonce/timestamp not found");
 
 }
-

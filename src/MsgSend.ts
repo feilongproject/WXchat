@@ -11,8 +11,8 @@ export async function MsgSend(msgInfo: string, type: string): Promise<Response> 
         method: "post",
         body: JSON.stringify({
             msgtype: type,
-            agentid: WX.wecomAgentId,
-            touser: WX.wecomTouid,
+            agentid: WX.AgentId,
+            touser: WX.Touid,
             text: {
                 content: msgInfo,
             },
@@ -29,7 +29,7 @@ export async function MsgSend(msgInfo: string, type: string): Promise<Response> 
     //var res=JSON.parse(`{"errcode":0,"errmsg":"ok","msgid":"fcLc6UhB2absSaoEDgOVFPKytt-HIDZeXtI_-55eQiuVLzkX6jsB0s_lvaCaVg30kvOFUhPd5r0FEnI-iXyeSw"}`)
 
     sendMsgRes.Content = msgInfo
-    sendMsgRes.MsgUserType = "myself"
+    sendMsgRes.MsgUserType = "client"
     sendMsgRes.MsgType = "text"
 
 

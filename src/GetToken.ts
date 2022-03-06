@@ -23,7 +23,7 @@ export async function GetToken(): Promise<string> {
         return HistoryToken.access_token
     }
 
-    const NewToken: Token = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${WX.wecomCId}&corpsecret=${WX.wecomSecret}`).then(res => {
+    const NewToken: Token = await fetch(`https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${WX.CId}&corpsecret=${WX.Secret}`).then(res => {
         const r: any = res.json()
         console.log(`New Token: ${JSON.stringify(r)}`)
         return r

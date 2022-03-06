@@ -1,6 +1,4 @@
 dist
 node_modules
-transpiled
-/.idea/
 wrangler.toml
-src/var.ts
+package-lock.json

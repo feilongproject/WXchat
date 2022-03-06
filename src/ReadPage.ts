@@ -7,7 +7,7 @@ export async function ReadPage() {
 
     //console.log(CHAT)
     var list = await CHAT.list()
-    console.log(list.keys)
+    //console.log(JSON.stringify(list.keys))
     if (list.keys.length == 0) {
         page += `<h1>No Msg</h1>`
     }
@@ -49,7 +49,7 @@ export async function ReadPage() {
                     <div class="msg-${keyId.MsgUserType}">
                         <div>Time: ${dateStrD + " " + dateStrT}<hr>
                             Content:<br>
-                            <button onclick="PlayAmr('${keyId.MediaId}')">阅读语音</button>
+                            <button onclick="PlayAmr('${keyId.MediaId}')">播放语音</button>
                             <details style="background-color: rgba(255, 255, 255, 0.5);">
                                 <summary>voice id</summary>
                                 ${keyId.MediaId}

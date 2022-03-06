@@ -15,6 +15,17 @@ export var readPage = `
         <title>hello world</title>
         <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/feilongproject/bili-downloader/favicon.ico">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/BenzLeung/benz-amr-recorder/BenzAMRRecorder.min.js"></script>
+        <script type="text/javascript">
+            function  sendmsg(){
+                var msg = document.getElementById("msg-readying").value;
+                console.log(msg);
+                if(msg) {
+                    fetch(\`/send?msg=\${msg}\`);
+                } else {
+                    alert("no msg!")
+                }
+            }
+        </script>
         <style type="text/css">
             body{
                 margin-right: 10%;
@@ -26,15 +37,15 @@ export var readPage = `
             body div{
                 margin: 10px 10px 10px 10px;
             }
-            .msg-myself{
+            .msg-client{
                 align-self: flex-end;
             }
-            .msg-another{
+            .msg-server{
                 align-self: flex-start;
             }
             .msg-send,
-            .msg-another,
-            .msg-myself{
+            .msg-client,
+            .msg-server{
                 background-color: #0cf;
                 box-shadow: 1px 1px 50px rgb(0 0 0 / 30%);
                 border-radius: 5px;
@@ -70,10 +81,10 @@ export var readPage = `
     </head>
     <body>
         <div class="msg-send">
-            <form action="/send" method="get" class="msg-send-form">
-                <input class="msg-send-text" type="text" id="msg" required="" placeholder="等待发送" name="msg">
-                <input class="msg-send-button" type="submit" value="发送">
-            </form>
+            <dev" class="msg-send-form">
+                <input class="msg-send-text" type="text" id="msg-readying" placeholder="等待发送">
+                <button class="msg-send-button" onclick="sendmsg()">发送</button>
+            </div>
         </div>
         <!-- MSG BODY -->
 
