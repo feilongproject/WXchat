@@ -22,7 +22,7 @@ async function Main(request: Request): Promise<Response> {
         if (!type) type = "text"
         if (!msgInfo) throw new Error("msg empty");
 
-        return await MsgSend(msgInfo, type)
+        return await MsgSend(msgInfo, type, wxcom)
 
     } else if (pathname.startsWith("/rece")) {
         return await MsgRece(wxcom, request,)
@@ -37,15 +37,11 @@ async function Main(request: Request): Promise<Response> {
         console.log(`\nConver page\ntype: ${type}\nid: ${id}`)
         if (type && id) {
             if (type == "voice") {
-                return ConverVoice(id)
-            } else return new Response(`<h1>error: type unknown</h1>`, {
-                headers: { "Content-Type": "text/html;charset=utf-8" },
-            })
-        } else {
-            return new Response(`<h1>error: id or type empty</h1>`, {
-                headers: { "Content-Type": "text/html;charset=utf-8" },
-            })
-        }
+                return ConverVoice(id,wxcom)
+            } else throw new Error("error: type unknown");
+
+        } else throw new Error("error: id or type empty");
+
 
     } else {
         return new Response(`<h1>404 not found page</h1>`, {

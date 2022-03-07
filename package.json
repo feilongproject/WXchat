@@ -30,7 +30,7 @@
         "stream": "^0.0.2",
         "string_decoder": "^1.3.0",
         "timers": "^0.1.1",
-        "wecom-msg-manage": "^1.1.0",
+        "wecom-msg-manage": "^1.2.2",
         "xml2js": "^0.4.23"
     }
 }

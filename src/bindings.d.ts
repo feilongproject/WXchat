@@ -33,4 +33,11 @@ declare global {
     MsgUserType?: string
   }
 
+  interface Token {
+    errcode: number;
+    errmsg: string;
+    access_token: string;
+    expires_in: number;
+    addIn: number;
+}
 }
